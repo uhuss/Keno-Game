@@ -127,11 +127,18 @@ public class JavaFXTemplate extends Application {
     private Label totalWinningsLabel;
     private TextArea numbersDrawnArea;
     private BorderPane gameRoot; // Main root pane for the game scene
+    
+    //ARIANA
+    private Keno_Game kenoGame;
+    
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Keno");
+        
+        //ARIANA
+        kenoGame = new Keno_Game(100);
 
         //Build the Welcome Scene
         welcomeScene = createWelcomeScene();
@@ -143,7 +150,29 @@ public class JavaFXTemplate extends Application {
         primaryStage.setScene(welcomeScene);
         primaryStage.show();
     }
+    
+    //ARIANA
+    private void startDrawing() {
+        List<Integer> playerNumbers = getSelectedNumbers();
+        
+        kenoGame.getPlayer().selectNumbers(playerNumbers);
+        
+        boolean success = kenoGame.processDrawing(playerNumbers, 1);
+        
+        if (success) {
+            //UPDATE THE BOARD (UI)
+            
+     
+        } else {
+        	  throw new IllegalArgumentException("Drawing error, could not process drawing");
+        }
+    }
 
+    //ARIANA: NOTE
+    //after drawing we need to get the numbers chosen and matched to show up with the UI
+    
+    
+    
     //Creates the initial Welcome Scene.
     private Scene createWelcomeScene() {
         BorderPane root = new BorderPane();
