@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 public class Player {
     private Integer balance;
     private Integer currentBet;
@@ -17,7 +16,7 @@ public class Player {
     }
     
     public Player(int addBalance) {
-    	this.balance = this.balance + addBalance;
+    	this.balance = addBalance;    	
     	this.selectedNumbers = new ArrayList<>();
     	this.currentBet = 0;
     	this.payout = null;
@@ -56,6 +55,7 @@ public class Player {
         return true;
     }
     
+    // This is the method the UI will call for "Pick Random Numbers"
     public void quickPick(int numSpots) {
         Random rand = new Random();
         selectedNumbers.clear();
