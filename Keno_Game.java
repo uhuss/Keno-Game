@@ -1,22 +1,24 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Keno_Game {
-    private Player player;
-    private Drawing drawing;  
+	///has two instances of classes- Player and Drawing
+    private Player player; 
+    private Drawing drawing; 
     
-    private boolean gameActive = false;
-    private int totalDrawings = 1;
-    private int totalWinnings = 0;
-    private int currentDrawingWinnings = 0;
-    private int currentDrawingNumber = 1;
+    private boolean gameActive = false; //flag for checking the game's status
+    private int totalDrawings = 1; //variable to keep track of player's choice of drawings 
+    private int totalWinnings = 0; //variable for keeping track of overall balance
+    private int currentDrawingWinnings = 0; //variable for keeping track of current game's balance
+    private int currentDrawingNumber = 1; //variable for keeping track of current drawing #
 
-
+    //constructor
     public Keno_Game(int balance) {
         this.player = new Player(balance);
         this.drawing = new Drawing();
     }
 
-
+    //function will activate game and initialize drawing & payout
     public void startGame(int spots, int drawings) {
         if (spots < 1 || spots > 10) {
             throw new IllegalArgumentException("Spots must be between 1 and 10");
@@ -27,20 +29,27 @@ public class Keno_Game {
         player.initializePayout(spots);
     }
 
+    //function handles drawing after numbers chosen
     public boolean processDrawing(List<Integer> playerNumbers, int betAmount) {
+    	
+    	//ensure game has processed spots and drawing first 
     	if(!gameActive) {
     		return false;
     	}
     	
+    	//ensure bet amount is valid
     	if(!player.placeBet(betAmount)) {
     		return false;
     	}
     	  	
+    	//generate the random numbers
     	drawing.generateNumbers(20);
     	
+    	//find the matches
     	List<Integer> matches = drawing.findMatches(playerNumbers);
     	int matchCount = matches.size();
     	
+    	//calculate winnings 
     	this.currentDrawingWinnings = player.calculateWinnings(matchCount);
     	this.totalWinnings += currentDrawingWinnings;
     	
@@ -48,6 +57,7 @@ public class Keno_Game {
     		player.awardWinnings(currentDrawingWinnings);
     	}
     	
+    	//process all drawings
     	currentDrawingNumber++;
     	
     	if(currentDrawingNumber >= totalDrawings) {
@@ -57,6 +67,7 @@ public class Keno_Game {
     	return true; 
     }
     
+    //function that resets all private variables to their original values
     public void resetGame(int initialBalance) {
         this.player = new Player(initialBalance);
         this.drawing = new Drawing();
@@ -67,9 +78,12 @@ public class Keno_Game {
         this.gameActive = false;
     }
     
+    //function that determines if more drawings need to be made
     public boolean hasMoreDrawings() {
     	return gameActive && currentDrawingNumber < totalDrawings;
     }
+    
+    //getters
     
     public int getCurrentDrawingWinnings() {
     	return currentDrawingWinnings;
