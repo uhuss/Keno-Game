@@ -65,7 +65,6 @@ public class Player {
         		return false;
         	}
         }
-        
         this.selectedNumbers = new ArrayList<>(numbers);
         this.payout = new Payout(numbers.size());
         return true;
