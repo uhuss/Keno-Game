@@ -5,6 +5,11 @@ public class Payout {
   
     
     public Payout(int spotsChosen) {
+    	
+    	if(spotsChosen != 1 && spotsChosen != 4 && spotsChosen != 8 && spotsChosen != 10)  {
+    		throw new IllegalArgumentException("Game must be a 1, 4, 8, or 10 spot game!");
+    	}
+    	
         switch (spotsChosen) {
         
         //cases represent the #spot game 
