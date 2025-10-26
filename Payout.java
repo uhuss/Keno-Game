@@ -1,4 +1,5 @@
 public class Payout {
+	//list handles the array for # of spots in regards to corresponding match to prizes
     private int[] matchArray;
     private int[] prizeArray;
   
@@ -34,6 +35,7 @@ public class Payout {
            
     }
     
+    //matches match array index to prize array index
 	public int getPayout(int matches) {
 	    for (int i = 0; i < matchArray.length; i++) {
 	        if (matchArray[i] == matches) {
