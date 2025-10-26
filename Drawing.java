@@ -31,6 +31,10 @@ public class Drawing {
     
     //function generates the numbers that are winners in the round
     public void generateNumbers(int count) {
+    	if(count != 20) {
+    		throw new IllegalArgumentException("cannot generate anything except 20 winning numbers");
+    	}
+    	
         winningNumbers.clear();
         Random rand = new Random();
         
