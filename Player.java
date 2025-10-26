@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class Player {
 
-    private Integer balance; //balance for player
-    private Integer currentBet; //wager that player placed
+    private Integer balance = 0; //balance for player
+    private Integer currentBet = 0; //wager that player placed
     private List<Integer> selectedNumbers; //numbers that player chose
     private Payout payout; //payout particular to player's matched numbers
     
