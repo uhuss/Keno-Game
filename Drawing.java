@@ -4,26 +4,32 @@ import java.util.Random;
 
 
 public class Drawing {
+    //list to save the numbers generated and the matched numbers
     private List<Integer> winningNumbers;
     private List<Integer> matchedNumbers;
     
+    //constructor
     public Drawing() {
         this.winningNumbers = new ArrayList<>();
         this.matchedNumbers = new ArrayList<>();
     }
     
+    //returns new array of the winning numbers list
     public List<Integer> getWinningNumbers() { 
     	return new ArrayList<>(winningNumbers); 
     }
     
+    //returns new array of the matched numbers list
     public List<Integer> getMatchedNumbers() { 
     	return new ArrayList<>(matchedNumbers); 
     }
     
+    //returns the matching numbers as an int (count)
     public int getMatchCount(List<Integer> playerNumbers) {
         return findMatches(playerNumbers).size();
     }
     
+    //function generates the numbers that are winners in the round
     public void generateNumbers(int count) {
         winningNumbers.clear();
         Random rand = new Random();
@@ -36,6 +42,7 @@ public class Drawing {
         }
     }
     
+    //function that finds matches from players and winnings numbers
     public List<Integer> findMatches(List<Integer> playerNumbers) {
         matchedNumbers.clear();
         for (int num : playerNumbers) {
