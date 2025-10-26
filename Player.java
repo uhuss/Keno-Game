@@ -59,6 +59,13 @@ public class Player {
         if (numbers == null || numbers.size() < 1 || numbers.size() > 10) {
             return false;
         }
+        
+        for(int n : numbers) {
+        	if(n < 1 || n >= 81) {
+        		return false;
+        	}
+        }
+        
         this.selectedNumbers = new ArrayList<>(numbers);
         this.payout = new Payout(numbers.size());
         return true;
